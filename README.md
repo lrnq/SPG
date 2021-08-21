@@ -3,4 +3,6 @@ Implementation of `Algorithm A` from *On Two Dimensional Packing* (Azar and Epst
 
 Features: `TODO`
 
-![](packing.png)
+<p align="center">
+  <img width="363" height="570" src="packing.png">
+</p>
