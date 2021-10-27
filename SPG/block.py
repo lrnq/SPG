@@ -9,7 +9,7 @@ class Block:
     def add_rectangle(self, rectangle):
         self.rectangle_widths += rectangle.width
         self.rectangles.append(rectangle)
-        if self.rectangle_widths > 1-self.W:
+        if self.rectangle_widths >= 1-self.W:
             self.full = True
                     
     def get_full(self):

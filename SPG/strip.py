@@ -26,7 +26,7 @@ class Strip:
         bh = self._nearest_power(rectangle.height, self.alpha)
         # Check if rectangle is a buffer
         if rectangle.width >= self.W:
-            self._insert_new_block(bh, rectangle)
+            self._insert_new_block(rectangle.height, rectangle)
         # Else try to find a viable block
         else: self._insert_small_rectangle(bh, rectangle)
         return 
@@ -43,8 +43,8 @@ class Strip:
     def _find_viable_block(self, candidates, width):
         lowest_viable = None
         for i in range(len(candidates)-1, -1, -1):
-            if 1-candidates[i].rectangle_widths < width:
-                break
+            if candidates[i].rectangle_widths + width > 1-self.W:
+                continue
             if not candidates[i].get_full():
                 lowest_viable = candidates[i]
         return lowest_viable
@@ -63,8 +63,10 @@ class Strip:
         height = self.get_height()
         fig = plt.figure(figsize=(2, max(10, height)))
         ax = fig.add_subplot(111)
-        ax.set_xlim([0, 1])
+        ax.set_xlim([0,1])
+        ax.set_xticks(list(map(float, ["0", "0.25", "0.50", "0.75", "1"])))
         ax.set_ylim([0, height+0.1/scaling])
+        ax.set_yticks([])
         ax.set_aspect('equal')
         cur_y = 0
         for idx, block in enumerate(self.blocks_seq):
@@ -77,7 +79,11 @@ class Strip:
                                            rectangle.height,
                                            linestyle="-",
                                            ec = "black",
-                                           fc = "grey"))
+                                           fc = "lightgrey"))
                 cur_x += rectangle.width
             cur_y += block.height
+        ax.axvline(0.75, color="green", linestyle = "--")
+        ax.tick_params(axis='both', which='major', labelsize=13)
+        plt.tight_layout()
+        fig.savefig("packing.png")
         plt.show()
