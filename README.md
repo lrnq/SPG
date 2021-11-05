@@ -1,5 +1,5 @@
 # 2-Dimensional Online Strip Packing w. Tetris constraint.
-Implementation of `Algorithm A` from *On Two Dimensional Packing* (Azar and Epstein, 1997) 
+Implementation of `Algorithm A` from *On Two Dimensional Packing* by Azar and Epstein [Journal of Algorithms, 1997] 
 
 Features: `TODO`
 
